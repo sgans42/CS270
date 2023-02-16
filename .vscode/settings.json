@@ -1,0 +1,36 @@
+{
+
+	"editor.tabSize": 2,
+	"liveSassCompile.settings.formats":[
+			{
+					"format": "expanded",
+					"extensionName": ".css",
+					"savePath": "/src/css/"
+			},
+	],
+	"sqltools.connections": [
+			{
+					"mysqlOptions": {
+							"authProtocol": "default"
+					},
+					"previewLimit": 50,
+					"server": "localhost",
+					"port": 3306,
+					"driver": "MySQL",
+					"name": "New",
+					"database": "CFG",
+					"username": "test",
+					"password": ""
+			}
+	],
+	"editor.bracketPairColorization.enabled": true,
+"editor.guides.bracketPairs": true,
+"workbench.colorCustomizations": {
+	"editorBracketHighlight.foreground1": "#fd3333",
+	"editorBracketHighlight.foreground2": "#ff8838",
+	"editorBracketHighlight.foreground3": "#ffea35",
+	"editorBracketHighlight.foreground4": "#00dd64",
+	"editorBracketHighlight.foreground5": "#00c7ff",
+	"editorBracketHighlight.foreground6": "#2653ff"
+}
+}
