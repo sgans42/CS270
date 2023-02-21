@@ -1,3 +1,18 @@
+header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 2px solid black;
+  text-align: center;
+}
+.title {
+  font-size: 200%;
+}
+.username {
+  justify-content: left;
+}
+
+/* end of header */
+
 .cont { /* entire game and leaderboard display */ 
 	display: flex;
 	justify-content: space-evenly;
@@ -19,6 +34,11 @@ h2::after { /* line after titles */
   display: block;
   border-bottom: 2px solid black;
   margin-top: 5px;
+}
+
+img {
+  max-width: 70%;
+  max-height: 70%;
 }
 
 .game, .leaderboard {
