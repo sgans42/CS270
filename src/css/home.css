@@ -29,20 +29,39 @@ header {
 	text-align: center;
 }
 
-h2::after { /* line after titles */
+img {
+	max-width: 70%;
+  max-height: 70%;
+}
+
+h2::after { /* line after game titles */
 	content: "";
   display: block;
   border-bottom: 2px solid black;
   margin-top: 5px;
-}
-
-img {
-  max-width: 70%;
-  max-height: 70%;
-}
-
-.game, .leaderboard {
 	
 }
+
+
+
+					/* Leaderboard settings */ 
+
+.score_elem {
+	display: flex;
+	columns: 149px 2px 149px;
+	justify-content: space-around;
+}
+
+.score#line {
+	content: "";
+	display: block;
+	top: 0;
+	bottom: 0;
+  border-right: 2px solid black;
+}
+
+.score {
+}
+
 
 
