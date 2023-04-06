@@ -1,0 +1,96 @@
+header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 2px solid black;
+  text-align: center;
+}
+.title {
+  font-size: 200%;
+}
+.username {
+  justify-content: left;
+}
+
+
+
+.wsg-container {
+	overflow: hidden; 
+	zoom: .75;
+
+}
+
+div.wsg {
+  position: relative;
+  height: 482px;
+  width: 640px;
+  border: 3px;
+	display: inline-block;
+  overflow: hidden;
+}
+
+.wgs__mole-head {
+  position: absolute;
+  height: 356px;
+  width: 376px;
+  left: 109px;
+  transition: .25s;
+}
+
+.wgs__dirt-pile {
+  position: absolute;
+  height: 220px;
+  width: 640px;
+  bottom: 0;
+}
+
+.wgs__mole-head--hidden {
+  left: 109px;
+  margin-top: 482px;
+}
+
+div.pf {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+
+
+.sb {
+  background-color: cornflowerblue;
+  border-bottom: 1px solid #645DED;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  color: white;
+  display: flex;
+  font-size: 30px;
+  margin-bottom: 50px;
+  padding: 10px 20px;
+}
+
+
+.sb__mole-counter {
+  flex: 1 0 0;
+  text-align: right;
+  margin-right: auto;
+}
+
+.sb__score-holder {
+  flex: 1 0 0;
+}
+
+.sb__game-over--hidden {
+  flex: 1 0 0;
+  display: none;
+}
+
+.start-btn {
+  flex: 1 0 0;
+  text-align: right;
+	
+	background: none;
+  border: none;
+  padding: 0;
+  font-size: 16px;
+  text-decoration: underline;
+  color: white;
+}
+
