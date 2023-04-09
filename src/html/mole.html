@@ -3,7 +3,34 @@
 	<head>
 		<title>Best Games Home</title>
 		<link href="..\css\mole.css" rel="stylesheet">
+		<link href="..\css\header.css" rel="stylesheet">
 		<script type="text/javascript" src="../javaScript/mole.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        var screenWidth = $(window).width();
+        console.log(screenWidth);
+        if(screenWidth < 500) {
+          $('.pf').css('grid-template-columns', '1fr 1fr');
+
+          var targetWidth = 1350;
+
+          var screenWidth = $(window).width();
+          var zoomLevel = (screenWidth / targetWidth);
+
+          $('.wsg-container').css('zoom', zoomLevel);
+        } 
+        else {
+          var targetWidth = 2700;
+
+          var screenWidth = $(window).width();
+          var zoomLevel = (screenWidth / targetWidth);
+
+          $('.wsg-container').css('zoom', zoomLevel);
+        }
+      });
+    </script>
 	</head>
 
 	<body>

@@ -1,17 +1,4 @@
-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  border-bottom: 2px solid black;
-  text-align: center;
-}
-.title {
-  font-size: 200%;
-}
-.username {
-  justify-content: left;
-}
 
-/* end of header */
 
 .cont { /* entire game and leaderboard display */ 
 	display: flex;

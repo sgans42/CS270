@@ -1,22 +1,18 @@
-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  border-bottom: 2px solid black;
-  text-align: center;
+/* @media (max-width: 800px) {
+  .wsg-container {
+    zoom: .5;
+  }
 }
-.title {
-  font-size: 200%;
-}
-.username {
-  justify-content: left;
-}
-
+@media (min-width: 800px) and (max-width: 1600px) {
+  .wsg-container {
+    zoom: .5;
+  }
+} */
 
 
 .wsg-container {
 	overflow: hidden; 
-	zoom: .75;
-
+  zoom: 1;
 }
 
 div.wsg {

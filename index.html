@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Best Games login</title>
+		<link href="..\css\header.css" rel="stylesheet">
+  </head>
+  
 		<link href="home.css" rel="stylesheet">
 
-	<body>
-		<a href="src\html\login.html">home</a> <!-- link to login page -->
+    <body>
+      <h1>Best Games</h1>
 
-		    <!-- Start of header-->
-    <header>
-      <div>
-        <p class="username">Welcome 'username'</p> <!-- need to use JS to get username-->
-      </div>
-
-      <div class="title">
-        <a href="home.html">Best Games</a>
-      </div>
-
-      <div>
-        <button onclick="logout()">Logout</button> <!-- need to use JS to preform this -->
-      </div>
-    </header>
-    <!-- end of header-->
-	</body>
+      <form>
+        <fieldset>
+          <legend>Login</legend>
+        
+          <div>
+            <label for="firstName">Name</label>
+            <input type="text" name="fullName" id="fullName" required maxlength="15">
+          </div>
+  
+          <div>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" required maxlength="15">
+          </div>
+  
+  
+          <input type="submit" value="Submit">
+        </fieldset>
+      </form>
+      <a href="src/html/home.html">Homepage</a> <!-- link to home page -->
+  
+  
+    </body>
 
 
 </html>
