@@ -2,6 +2,11 @@
     header('Access-Control-Allow-Origin: *');
     header("Access-Control-Allow-Headers: *");
   ob_start();
+  
+  // Start the session
+  session_start();
+
+
   $servername = "localhost";
   $username = "root";
   $password = "";
@@ -22,9 +27,20 @@
 			// Get the form data
 			$fullName = $_POST['login_fullName'];
 			$username = $_POST['login_username'];
-				
-			// Handle login logic here
-			header("Location: ../html/home.html");
+
+			// Check if the username already exists
+			$sql_check = "SELECT * FROM user_info WHERE UserName = '$username'";
+			$result = $conn->query($sql_check);
+
+			if ($result->num_rows > 0) {
+				// Username already exists
+        $_SESSION['username'] = $username;
+        header("Location: ../html/home.html");
+        exit();
+      }				
+      else {
+        echo "Incorrect Username";
+      }
 
 			//add in the account verification here
 
@@ -44,11 +60,12 @@
 			}
 			else {
 				// Insert new user into the database
-				$sql = "INSERT INTO user_info (FirstName, UserName, TikScore, WhackAMoleScore, Hangman, Memory, NumberGuesser)
-				VALUES ('$name', '$username', null, null, null, null, null)";
+				$sql = "INSERT INTO user_info (FirstName, UserName)
+				VALUES ('$name', '$username')";
 				
 				if ($conn->query($sql) === TRUE) {
 					// Redirect to the home page
+          $_SESSION['username'] = $username;
 					header("Location: ../html/home.html");
 					exit();
 				}
