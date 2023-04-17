@@ -2,32 +2,53 @@
 <html lang="en">
   <head>
     <title>Best Games login</title>
-		<link href="..\css\header.css" rel="stylesheet">
+		<link href="src\css\login.css" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   
-		<link href="home.css" rel="stylesheet">
 
     <body>
       <h1>Best Games</h1>
+			<div class="login">
+				<form method="POST" action="src/php/login.php" class="login-form"> <!-- login start-->
+					<fieldset>
+						<input type="hidden" name="class" value="login-form">
 
-      <form>
-        <fieldset>
-          <legend>Login</legend>
-        
-          <div>
-            <label for="firstName">Name</label>
-            <input type="text" name="fullName" id="fullName" required maxlength="15">
-          </div>
-  
-          <div>
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username" required maxlength="15">
-          </div>
-  
-  
-          <input type="submit" value="Submit">
-        </fieldset>
-      </form>
+						<legend>Login</legend>
+					
+						<div>
+							<label for="login_firstName">Name</label>
+							<input type="text" name="login_fullName" id="login_fullName" maxlength="15">
+						</div>
+		
+						<div>
+							<label for="login_username">Username</label>
+							<input type="text" name="login_username" id="login_username" maxlength="15">
+						</div>
+		
+		
+						<button class="login" id="login-btn">Login</button>
+					</fieldset>
+				</form>
+
+				<form method="POST" action="src/php/login.php" class="create-form"> <!-- create user start-->
+					<fieldset>
+						<legend>Create Account</legend>
+						<input type="hidden" name="class" value="create-form">
+						<div>
+							<label for="create_firstName">Name</label>
+							<input type="text" name="create_fullName" id="create_fullName" maxlength="15">
+						</div>
+		
+						<div>
+							<label for="create_username">Username</label>
+							<input type="text" name="create_username" id="create_username" maxlength="15">
+						</div>
+		
+						<button class="create_acct" id="create-btn">Create Account</button>
+					</fieldset>
+				</form>
+			</div>
       <a href="src/html/home.html">Homepage</a> <!-- link to home page -->
   
   
