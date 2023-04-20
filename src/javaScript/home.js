@@ -1,8 +1,61 @@
-// Get the username from the .username element
-const usernameEl = document.querySelector('.username');
-const username = usernameEl ? usernameEl.textContent : '';
+//sets username at top of screen
+var username = sessionStorage.getItem('fullName');
+document.getElementById("cur_username").textContent = sessionStorage.getItem('fullName');
 
-// Update the .username element with the logged-in user's username
-if (usernameEl) {
-  usernameEl.textContent = "<?php echo $_SESSION['username']; ?>";
-}
+// main();
+
+// function main() {
+// 	tic_tac();
+// 	whack();
+
+// }
+
+
+//Tic Tac Toe Score 
+// function tic_tac() {
+
+// }
+
+//Whack a Mole Score
+
+console.log("ran whack");
+$.ajax({
+  type: "GET",
+  url: "src/php/home.php",
+  data: { 
+    user: username,
+    whack_user_score1: null,
+    whack_user_score2: null,
+    whack_user_score3: null,
+    whack_all_score1: null,
+    whack_all_score2: null,
+    whack_all_score3: null
+  },
+  success: function(data) {
+    // Parse the JSON response into a JavaScript object
+    var scores = JSON.parse(data);
+
+    // Get the scores for the current user
+    var userScore1 = scores.whack_user_score1;
+    var userScore2 = scores.whack_user_score2;
+    var userScore3 = scores.whack_user_score3;
+
+    // Get the top three scores for all users
+    var allScore1 = scores.whack_top_score1.score1;
+    var allScore2 = scores.whack_top_score2.score1;
+    var allScore3 = scores.whack_top_score3.score1;
+
+    // Display the scores on the webpage
+    document.getElementById("user_whack-score1").textContent = userScore1;
+    document.getElementById("user_whack-score2").textContent = userScore2;
+    document.getElementById("user_whack-score3").textContent = userScore3;
+
+    document.getElementById("all_whack-score1").textContent = allScore1;
+    document.getElementById("all_whack-score2").textContent = allScore2;
+    document.getElementById("all_whack-score3").textContent = allScore3;
+  },
+  error: function() {
+    alert('Error getting scores');
+  }
+});
+

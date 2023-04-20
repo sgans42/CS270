@@ -9,6 +9,8 @@ let popupLength = def_popupLength; //set to 3000 as default
 let isGameRunning = def_isGameRunning;
 let hideTimeout;
 let clickable = false;
+let startTime;
+
 
 function popUpRandomMole() {
   if (molesLeft <= 0) {
@@ -33,6 +35,9 @@ function popUpRandomMole() {
   document.querySelector('.sb__moles').innerHTML = molesLeft;
 
   hideTimeout = setTimeout(() => hideMole(moleHead), popupLength);
+
+startTime = new Date().getTime(); // Add this line to record the start time
+
 }
 
 function hideMole(mole) {
@@ -59,9 +64,9 @@ function restartGame() {
 window.addEventListener('DOMContentLoaded', () => {
   const startGameBtn = document.querySelector('#start-game-btn');
   startGameBtn.addEventListener('click', () => {
-		if(isGameRunning) { 
-			return;
-		}
+    if(isGameRunning) { 
+      return;
+    }
     startGameBtn.classList.add('sb__start-game-btn--hidden');
     restartGame();
   });
@@ -70,10 +75,16 @@ window.addEventListener('DOMContentLoaded', () => {
   for (let moleHead of moleHeads) {
     moleHead.addEventListener('click', event => {
       if(!clickable) {
-				return;
-			}
+        return;
+      }
 
-      score += 1;
+      const currentTime = new Date().getTime();
+      const reactionTime = currentTime - startTime;
+
+      // Calculate the score based on reaction time and remaining moles
+      const points = Math.floor(1000 / reactionTime) * (1 + (def_molesLeft - molesLeft) / 10);
+      score += points;
+			score = parseFloat(score.toFixed(2)); // Round the score to 2 decimal places
       document.querySelector('.sb__score').innerHTML = score;
       popupLength -= popupLength / 10;
 

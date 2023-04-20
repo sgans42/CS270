@@ -1,5 +1,7 @@
 // Wait for the DOM to be loaded before attaching event listeners
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // Get references to the login and create account buttons
@@ -30,10 +32,9 @@ function verifyAccount(event) {
     alert('Please enter a name and a username');
     return;
   }
+	sessionStorage.setItem('fullName', username); //sets username to session, sessionStorage.getItem('fullName');
 
   // Send a request to the server to verify the account
-  // Replace this with your own code to verify the account
-  // For demo purposes, we just log the values to the console
   $.ajax({
     type: "POST",
     url: "src/php/login.php",
@@ -44,6 +45,7 @@ function verifyAccount(event) {
     }
   }).done(function(data) {
     // Redirect to the homepage
+		sessionStorage.setItem('username_cur', username);
     window.location.href = 'src/html/home.html';
   }).fail(function() {
     alert('Incorrect name or username');
@@ -67,9 +69,9 @@ function createAccount(event) {
     return;
   }
 
+	sessionStorage.setItem('fullName', username); //sets username to session, sessionStorage.getItem('fullName');
+
   // Send a request to the server to create the account
-  // Replace this with your own code to create the account
-  // For demo purposes, we just log the values to the console
   $.ajax({
     type: "POST",
     url: "src/php/login.php",
@@ -80,6 +82,7 @@ function createAccount(event) {
     }
   }).done(function(data) {
     // Redirect to the homepage
+		sessionStorage.setItem('username_cur', username);
     window.location.href = 'src/html/home.html';
   }).fail(function() {
     alert('Username already exists');

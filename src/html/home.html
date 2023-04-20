@@ -4,7 +4,8 @@
 		<title>Best Games Home</title>
 		<link href="..\css\home.css" rel="stylesheet">
 		<link href="..\css\header.css" rel="stylesheet">
-    <script type="text/javascript" src="../javaScript/home.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer type="text/javascript" src="../javaScript/home.js"></script>
 
 	</head>
 
@@ -12,7 +13,7 @@
     <!-- Start of header-->
     <header>
       <div>
-        <p class="username">Welcome 'username'</p> <!-- need to use JS to get username-->
+        <p class="username">Welcome <span id="cur_username">'username'</span></p> <!-- need to use JS to get username-->
       </div>
 
       <div class="title">
@@ -26,7 +27,7 @@
     <!-- end of header-->
 
 		
-		<div class="cont"> <!-- entire game and leaderboard display -->
+		<div method="GET" class="cont"> <!-- entire game and leaderboard display -->
 			<div class="game"> <!-- game row -->
 
         <!-- Tic Tac Toe -->
@@ -72,7 +73,7 @@
 
 			</div>
 
-			<div class="leaderboard"> <!-- Leaderboard Row-->
+			<div method="GET" class="leaderboard"> <!-- Leaderboard Row-->
 
         <!-- Tic Tac Toe -->
 				<div class="leaderboard" id="blk" name="tic-tac-toe">  <!-- Start of Tic Tac Toe Leaderboard -->
@@ -88,7 +89,6 @@
 						<div class="score" id="line">
 						</div>
 						
-
 						<div class="score" id="all_score" name="tic-tac-toe"> <!-- Everyones score -->
 							<p>All Score</p>
 							<p>Games won: 15</p>
@@ -108,9 +108,9 @@
 					<div class="score_elem"><!-- Score board element -->
 						<div class="score" id="user_score" name="mole"> <!-- User score -->
 							<p>Your score</p>
-							<p>Time 1: 15</p>
-							<p>Time 2: 15</p>
-							<p>Time 3: 15</p>
+							<p >Score 1: <span id="all_whack-score1">15</span></p>
+							<p >Score 2: <span id="all_whack-score2">15</span></p>
+							<p >Score 3: <span id="all_whack-score3">15</span></p>
 
 						</div>
 
@@ -119,9 +119,9 @@
 
 						<div class="score" id="all_score" name="mole"> <!-- Everyones score -->
 							<p>All Score</p>
-							<p>Time 1: 15</p>
-							<p>Time 2: 15</p>
-							<p>Time 3: 15</p>
+							<p >Score 1: <span id="user_whack-score1">15</span></p>
+							<p >Score 2: <span id="user_whack-score2">15</span></p>
+							<p >Score 3: <span id="user_whack-score3">15</span></p>
 						</div>
 					</div>
 				</div> <!-- end of Whack a mole Leaderboard -->
