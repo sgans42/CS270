@@ -4,6 +4,8 @@
 		<title>Best Games Home</title>
 		<link href="..\css\memory.css" rel="stylesheet">
 		<link href="..\css\header.css" rel="stylesheet">
+		<script type="text/javascript" src="../javaScript/mem.js"></script>
+
 	</head>
 
 	<body>
@@ -21,5 +23,13 @@
       </div>
     </header>
     <!-- end of header-->
+
+		<div class="container">
+			<h1>Memory Match Game</h1>
+			<p>Score: <span id="scoreDisplay">0</span></p>
+			<button onclick="startNewGame()">Start New Game</button>
+			<div class="grid">
+			<!-- The grid will be populated with cards using JavaScript -->
+		</div>
   </body>
 </html>

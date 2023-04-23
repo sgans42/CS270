@@ -29,7 +29,7 @@
 	$whack_user_score3 = $row["score3"];
 
 	$sql = "SELECT score1, score2, score3 FROM whack_a_mole ORDER BY score1 DESC, score2 DESC, score3 DESC LIMIT 3";
-	$result = $conn->query($sql);
+	$result += $conn->query($sql);
 
 
 	// Return the scores as a JSON-encoded response
@@ -40,7 +40,6 @@
 	);
 
 
-	echo json_encode($response);
 
 
 

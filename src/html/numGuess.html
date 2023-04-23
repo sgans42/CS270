@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Best Games Home</title>
+		<title>Number Guesser</title>
 		<link href="..\css\numGuess.css" rel="stylesheet">
 		<link href="..\css\header.css" rel="stylesheet">
+		<script type="text/javascript" src="../javaScript/numGuess.js"></script>
+
 	</head>
 
 	<body>
@@ -21,5 +23,17 @@
       </div>
     </header>
     <!-- end of header-->
+
+		<div class="container">
+			<p>Guess a number between 0 and 100:</p>
+			<input type="number" id="userGuess" min="0" max="100">
+			<button class="guesser" onclick="checkGuess()">Submit Guess</button>
+			<button class="guesser" onclick="startNewGame()">Start New Game</button>
+
+			<p id="result"></p>
+		</div>
+
+
+
   </body>
 </html>

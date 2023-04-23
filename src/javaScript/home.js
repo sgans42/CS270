@@ -18,18 +18,11 @@ document.getElementById("cur_username").textContent = sessionStorage.getItem('fu
 
 //Whack a Mole Score
 
-console.log("ran whack");
 $.ajax({
   type: "GET",
   url: "src/php/home.php",
   data: { 
-    user: username,
-    whack_user_score1: null,
-    whack_user_score2: null,
-    whack_user_score3: null,
-    whack_all_score1: null,
-    whack_all_score2: null,
-    whack_all_score3: null
+    user: username
   },
   success: function(data) {
     // Parse the JSON response into a JavaScript object
@@ -46,13 +39,13 @@ $.ajax({
     var allScore3 = scores.whack_top_score3.score1;
 
     // Display the scores on the webpage
-    document.getElementById("user_whack-score1").textContent = userScore1;
-    document.getElementById("user_whack-score2").textContent = userScore2;
-    document.getElementById("user_whack-score3").textContent = userScore3;
+    document.getElementById("user_whack_score1").textContent = userScore1;
+    document.getElementById("user_whack_score2").textContent = userScore2;
+    document.getElementById("user_whack_score3").textContent = userScore3;
 
-    document.getElementById("all_whack-score1").textContent = allScore1;
-    document.getElementById("all_whack-score2").textContent = allScore2;
-    document.getElementById("all_whack-score3").textContent = allScore3;
+    document.getElementById("all_whack_score1").textContent = allScore1;
+    document.getElementById("all_whack_score2").textContent = allScore2;
+    document.getElementById("all_whack_score3").textContent = allScore3;
   },
   error: function() {
     alert('Error getting scores');

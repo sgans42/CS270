@@ -4,6 +4,8 @@
 		<title>Best Games Home</title>
 		<link href="..\css\hangman.css" rel="stylesheet">
 		<link href="..\css\header.css" rel="stylesheet">
+		<script type="text/javascript" src="../javaScript/hangman.js"></script>
+
 	</head>
 
 	<body>
@@ -21,5 +23,18 @@
       </div>
     </header>
     <!-- end of header-->
+
+
+		<div class="container">
+			<p id="wordDisplay"></p>
+			<p>Guess a letter:</p>
+			<input type="text" id="userGuess" maxlength="1">
+			<button class="guesser" onclick="checkGuess()">Submit Guess</button>
+			<button class="guesser" onclick="startNewGame()">Start New Game</button>
+			<p id="result"></p>
+			<p>Guessed letters: <span id="guessedLetters"></span></p>
+			<p id="guessesRemaining">Guesses remaining: <span id="remaining"></span></p>
+	</div>
+
   </body>
 </html>
