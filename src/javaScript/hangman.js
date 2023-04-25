@@ -3,6 +3,8 @@ let currentWord = '';
 let hiddenWord = '';
 let guessesRemaining = 7;
 let guessedLetters = [];
+var username = sessionStorage.getItem('fullName');
+
 
 function startNewGame() {
     currentWord = words[Math.floor(Math.random() * words.length)];
@@ -14,6 +16,33 @@ function startNewGame() {
     document.getElementById("remaining").textContent = guessesRemaining;
     document.getElementById("wordDisplay").textContent = hiddenWord;
     document.getElementById("guessedLetters").textContent = guessedLetters.join(', ');
+}
+
+function endOfGame(won) {
+	let message = won ? 'Congratulations! You won!' : `Game over! The word was: ${currentWord}`;
+	document.getElementById("result").textContent = message;
+
+	if(won) {
+		$.ajax({
+			type: "POST",
+			url: "../php/hangman.php",
+			data: {
+				username: username,
+			}
+		, 
+		success: function() {
+			alert('sucess');
+		}, 
+		error: function() {
+			alert('Error posting score');
+		}
+		});
+	}
+
+	// You can perform additional tasks here, such as updating the high scores
+
+	// Optionally, you can start a new game or wait for the user to start a new game manually
+	// startNewGame();
 }
 
 function checkGuess() {
@@ -49,17 +78,17 @@ function checkGuess() {
     document.getElementById("wordDisplay").textContent = hiddenWord;
 
     if (!found) {
-        guessesRemaining--;
-        document.getElementById("remaining").textContent = guessesRemaining;
-    }
+			guessesRemaining--;
+			document.getElementById("remaining").textContent = guessesRemaining;
+	}
 
-    if (hiddenWord === currentWord) {
-        result.textContent = 'Congratulations! You won!';
-    } else if (guessesRemaining <= 0) {
-        result.textContent = `Game over! The word was: ${currentWord}`;
-    } else {
-        result.textContent = '';
-    }
+	if (hiddenWord === currentWord) {
+			endOfGame(true);
+	} else if (guessesRemaining <= 0) {
+			endOfGame(false);
+	} else {
+			result.textContent = '';
+	}
 
     document.getElementById("userGuess").value = '';
 }

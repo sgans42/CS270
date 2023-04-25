@@ -1,3 +1,4 @@
+
 CREATE DATABASE score;
 USE score;
 
@@ -10,8 +11,6 @@ CREATE TABLE user_info (
 CREATE TABLE tic_tac_toe (
   user VARCHAR(15),
   score1 INT,
-	score2 INT,
-	score3 INT,
   FOREIGN KEY (user) REFERENCES user_info(username)
 );
 
@@ -25,25 +24,23 @@ CREATE TABLE whack_a_mole (
 
 CREATE TABLE hangman (
   user VARCHAR(15),
-  score1 DECIMAL(5,2),
-	score2 DECIMAL(5,2),
-	score3 DECIMAL(5,2),
+	score1 INT,
   FOREIGN KEY (user) REFERENCES user_info(username)
 );
 
 CREATE TABLE memory (
   user VARCHAR(15),
-  score1 DECIMAL(5,2),
-	score2 DECIMAL(5,2),
-	score3 DECIMAL(5,2),
+  score1 INT,
+	score2 INT,
+	score3 INT,
   FOREIGN KEY (user) REFERENCES user_info(username)
 );
 
 CREATE TABLE number_guesser (
   user VARCHAR(15),
-  score1 DECIMAL(5,2),
-	score2 DECIMAL(5,2),
-	score3 DECIMAL(5,2),
+  score1 INT,
+	score2 INT,
+	score3 INT,
   FOREIGN KEY (user) REFERENCES user_info(username)
 );
 
@@ -55,17 +52,17 @@ INSERT INTO user_info (first_name, username) VALUES
 ('David', 'dgans88');
 
 
-INSERT INTO tic_tac_toe (user, score1, score2, score3) VALUES 
-('sgans42', 10, 24, 69), ('john426', 12, 12, 12), ('dgans88', 14, 14, 14);
+INSERT INTO tic_tac_toe (user, score1) VALUES 
+('sgans42', 10), ('john426', 12), ('dgans88', 14);
 
 INSERT INTO whack_a_mole (user, score1, score2, score3) VALUES 
 ('sgans42', 15, 15, 15), ('john426', 18, 18, 18), ('dgans88', 21, 21, 21);
 
-INSERT INTO hangman (user, score1, score2, score3) VALUES 
-('sgans42', 20, 20, 20), ('john426', 24, 24, 24), ('dgans88', 28, 28, 28);
+INSERT INTO hangman (user, score1) VALUES 
+('sgans42', 4), ('john426', 6), ('dgans88', 28);
 
 INSERT INTO memory (user, score1, score2, score3) VALUES 
-('sgans42', 25, 25, 25), ('john426', 30, 30, 30), ('dgans88', 35, 35, 35);
+('sgans42', 7, 6, 5), ('john426', 6, 5, 4), ('dgans88', 7, 6, 5);
 
 INSERT INTO number_guesser (user, score1, score2, score3) VALUES 
-('sgans42', 30, 30, 30), ('john426', 36, 36, 36), ('dgans88', 42, 42, 42);
+('sgans42', 3, 30, 30), ('john426', 36, 36, 36), ('dgans88', 42, 42, 42);

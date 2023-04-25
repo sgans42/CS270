@@ -13,6 +13,8 @@ let cards = [];
 let flippedCards = [];
 let matchedPairs = 0;
 let score = 0;
+var username = sessionStorage.getItem('fullName');
+
 
 function startNewGame() {
     matchedPairs = 0;
@@ -60,34 +62,53 @@ function handleCardClick(e) {
     }
 }
 
+function endOfGame() {
+
+	$.ajax({
+		type: "POST",
+		url: "../php/memory.php",
+		data: {
+			username: username,
+			score: score
+		}
+	, 
+	success: function() {
+		alert('sucess');
+	}, 
+	error: function() {
+		alert('Error posting score');
+	}
+	});
+}
+
 function checkMatch() {
-    setTimeout(() => {
-        const card1 = document.querySelector(`[data-index="${flippedCards[0]}"]`);
-        const card2 = document.querySelector(`[data-index="${flippedCards[1]}"]`);
+	setTimeout(() => {
+			const card1 = document.querySelector(`[data-index="${flippedCards[0]}"]`);
+			const card2 = document.querySelector(`[data-index="${flippedCards[1]}"]`);
 
-        if (cards[flippedCards[0]] === cards[flippedCards[1]]) {
-            matchedPairs++;
-            score += 4;
+			if (cards[flippedCards[0]] === cards[flippedCards[1]]) {
+					matchedPairs++;
+					score += 4;
 
-            card1.removeEventListener("click", handleCardClick);
-            card2.removeEventListener("click", handleCardClick);
-            card1.style.backgroundColor = "green";
-            card2.style.backgroundColor = "green";
+					card1.removeEventListener("click", handleCardClick);
+					card2.removeEventListener("click", handleCardClick);
+					card1.style.backgroundColor = "green";
+					card2.style.backgroundColor = "green";
 
-            if (matchedPairs === images.length) {
-                alert("Congratulations! You won!");
-            }
-        } else {
-            score -= 1;
-            card1.classList.remove("flipped");
-            card2.classList.remove("flipped");
-            card1.querySelector("img").style.display = "none";
-            card2.querySelector("img").style.display = "none";
-        }
+					if (matchedPairs === images.length) {
+							endOfGame();
+					}
+			} else {
+					score -= 1;
+					card1.classList.remove("flipped");
+					card2.classList.remove("flipped");
+					card1.querySelector("img").style.display = "none";
+					card2.querySelector("img").style.display = "none";
+			}
 
-        updateScoreDisplay();
-        flippedCards = [];
-    }, 1000);
+			updateScoreDisplay();
+			flippedCards = [];
+	}, 1000);
 }
 
 function updateScoreDisplay() {

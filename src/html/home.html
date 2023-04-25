@@ -4,9 +4,14 @@
 		<title>Best Games Home</title>
 		<link href="..\css\home.css" rel="stylesheet">
 		<link href="..\css\header.css" rel="stylesheet">
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script defer type="text/javascript" src="../javaScript/home.js"></script>
-
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script>
+			$(document).ready(function() {
+			 	var username = sessionStorage.getItem('fullName');
+				document.getElementById("cur_username").textContent = sessionStorage.getItem('fullName');
+			});
+		</script>
 	</head>
 
 	<body>
@@ -25,7 +30,6 @@
       </div>
     </header>
     <!-- end of header-->
-
 		
 		<div method="GET" class="cont"> <!-- entire game and leaderboard display -->
 			<div class="game"> <!-- game row -->
@@ -132,9 +136,7 @@
 					<div class="score_elem"><!-- Score board element -->
 						<div class="score" id="user_score" name="hangman"> <!-- User score -->
 							<p>Your score</p>
-							<p >Score 1: <span id="user_tic_score1">15</span></p>
-							<p >Score 2: <span id="user_tic_score2">15</span></p>
-							<p >Score 3: <span id="user_tic_score3">15</span></p>
+							<p >Score: <span id="user_tic_score1">15</span></p>
 
 						</div>
 

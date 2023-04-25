@@ -1,6 +1,7 @@
 //sets username at top of screen
+
 var username = sessionStorage.getItem('fullName');
-document.getElementById("cur_username").textContent = sessionStorage.getItem('fullName');
+
 
 // main();
 
@@ -20,35 +21,39 @@ document.getElementById("cur_username").textContent = sessionStorage.getItem('fu
 
 $.ajax({
   type: "GET",
-  url: "src/php/home.php",
+  url: "../php/home.php",
   data: { 
     user: username
   },
-  success: function(data) {
-    // Parse the JSON response into a JavaScript object
-    var scores = JSON.parse(data);
-
-    // Get the scores for the current user
-    var userScore1 = scores.whack_user_score1;
-    var userScore2 = scores.whack_user_score2;
-    var userScore3 = scores.whack_user_score3;
-
-    // Get the top three scores for all users
-    var allScore1 = scores.whack_top_score1.score1;
-    var allScore2 = scores.whack_top_score2.score1;
-    var allScore3 = scores.whack_top_score3.score1;
-
-    // Display the scores on the webpage
-    document.getElementById("user_whack_score1").textContent = userScore1;
-    document.getElementById("user_whack_score2").textContent = userScore2;
-    document.getElementById("user_whack_score3").textContent = userScore3;
-
-    document.getElementById("all_whack_score1").textContent = allScore1;
-    document.getElementById("all_whack_score2").textContent = allScore2;
-    document.getElementById("all_whack_score3").textContent = allScore3;
-  },
+	success: function(data) {
+		const scores = JSON.parse(data);
+		// Update the UI with the user's scores
+		for (const game in scores.userScores) {
+			const gamePrefix = game === 'tic_tac_toe' ? 'user_tic' : game === 'whack_a_mole' ? 'user_whack' : game === 'hangman' ? 'user_hang' : game === 'memory' ? 'user_mem' : 'user_num';
+			document.getElementById(`${gamePrefix}_score1`).textContent = scores.userScores[game].score1;
+			if (scores.userScores[game].score2) {
+				document.getElementById(`${gamePrefix}_score2`).textContent = scores.userScores[game].score2;
+			}
+			if (scores.userScores[game].score3) {
+				document.getElementById(`${gamePrefix}_score3`).textContent = scores.userScores[game].score3;
+			}
+		}
+		// Update the UI with the top 3 scores for each game
+		for (const game in scores.topScores) {
+			const gamePrefix = game === 'tic_tac_toe' ? 'all_tic' : game === 'whack_a_mole' ? 'all_whack' : game === 'hangman' ? 'all_hang' : game === 'memory' ? 'all_mem' : 'all_num';
+			document.getElementById(`${gamePrefix}_score1`).textContent = scores.topScores[game].top1;
+			document.getElementById(`${gamePrefix}_score2`).textContent = scores.topScores[game].top2;
+			document.getElementById(`${gamePrefix}_score3`).textContent = scores.topScores[game].top3;
+		}
+		alert('sucess');
+	},
   error: function() {
     alert('Error getting scores');
   }
 });
+
+function logout() {
+  sessionStorage.removeItem('fullName');
+  window.location.href = 'login.html';
+}
 

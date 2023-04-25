@@ -1,5 +1,7 @@
 let playerTurn = true;
 let computerMoveTimeout = 0;
+var username = sessionStorage.getItem('fullName');
+
 
 const gameStatus = {
     MORE_MOVES_LEFT: 1,
@@ -74,24 +76,47 @@ function boardButtonClicked(button) {
     }
 }
 
-function switchTurn() {
+function endOfGame(message, won) {
+	clearTimeout(computerMoveTimeout);
+	computerMoveTimeout = 0;
 	const turnInfo = document.getElementById("turnInfo");
+	turnInfo.innerHTML = message;
+	playerTurn = false;
+
+	if(won) {
+		$.ajax({
+			type: "POST",
+			url: "../php/tic.php",
+			data: {
+				username: username,
+			}
+		, 
+		success: function() {
+			alert('sucess');
+		}, 
+		error: function() {
+			alert('Error posting score');
+		}
+		});
+	}
+}
+
+function switchTurn() {
 	const winner = checkForWinner();
 
 	if (winner === gameStatus.HUMAN_WINS) {
-			turnInfo.innerHTML = "You win!";
-			playerTurn = false;
+			endOfGame("You win!", true);
 	} else if (winner === gameStatus.COMPUTER_WINS) {
-			turnInfo.innerHTML = "Computer wins!";
-			playerTurn = false;
+			endOfGame("Computer wins!");
 	} else if (winner === gameStatus.DRAW_GAME) {
-			turnInfo.innerHTML = "Draw game";
-			playerTurn = false;
+			endOfGame("Draw game", false);
 	} else {
 			playerTurn = !playerTurn;
 			if (playerTurn) {
+					const turnInfo = document.getElementById("turnInfo");
 					turnInfo.innerHTML = "Your turn";
 			} else {
+					const turnInfo = document.getElementById("turnInfo");
 					turnInfo.innerHTML = "Computer's turn";
 					computerMoveTimeout = setTimeout(makeComputerMove, 1000);
 			}

@@ -50,8 +50,31 @@
 			}
 			else {
 				// Insert new user into the database
-				$sql = "INSERT INTO user_info (first_name, username)
+				$sql_user  = "INSERT INTO user_info (first_name, username)
 				VALUES ('$name', '$username')";
+				$conn->query($sql_user);
+
+				$sql_tic_tac_toe = "INSERT INTO tic_tac_toe (user) 
+				VALUES ('$username')";
+				$conn->query($sql_tic_tac_toe);
+
+				$sql_whack_a_mole = "INSERT INTO whack_a_mole (user) 
+				VALUES ('$username')";
+				$conn->query($sql_whack_a_mole);
+
+        $sql_hangman = "INSERT INTO hangman (user) 
+				VALUES ('$username')";
+				$conn->query($sql_hangman);
+
+				$sql_memory = "INSERT INTO memory (user) 
+				VALUES ('$username')";
+				$conn->query($sql_memory);
+
+				$sql_number_guesser = "INSERT INTO number_guesser (user) 
+				VALUES ('$username')";
+				$conn->query($sql_number_guesser);
+
+
 				
 				if ($conn->query($sql) === TRUE) {
 					// Redirect to the home page
@@ -59,7 +82,7 @@
 					exit();
 				}
 				else {
-					echo "Error: " . $sql . "<br>" . $conn->error;
+
 				}
 			}
 		}

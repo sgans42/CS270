@@ -9,8 +9,10 @@
 
     <script>
       $(document).ready(function() {
+				var username = sessionStorage.getItem('fullName');
+				document.getElementById("cur_username").textContent = sessionStorage.getItem('fullName');
+
         var screenWidth = $(window).width();
-        console.log(screenWidth);
         if(screenWidth < 500) {
           $('.pf').css('grid-template-columns', '1fr 1fr');
 
@@ -30,6 +32,7 @@
           $('.wsg-container').css('zoom', zoomLevel);
         }
       });
+
     </script>
 	</head>
 
@@ -38,7 +41,7 @@
     <!-- Start of header-->
     <header>
       <div>
-				<p class="username">Welcome <?php echo $username; ?></p>
+        <p class="username">Welcome <span id="cur_username">'username'</span></p> <!-- need to use JS to get username-->
       </div>
 
       <div class="title">

@@ -10,12 +10,13 @@ let isGameRunning = def_isGameRunning;
 let hideTimeout;
 let clickable = false;
 let startTime;
+var username = sessionStorage.getItem('fullName');
+
 
 
 function popUpRandomMole() {
   if (molesLeft <= 0) {
-    document.querySelector('.sb__game-over').classList.remove('sb__game-over--hidden');
-		isGameRunning = false;
+		endOfGame(); 
     return;
   }
 
@@ -24,6 +25,7 @@ function popUpRandomMole() {
   if (moleHeads.length === 0) {
     return;
   }
+
   const moleIndex = Math.floor(Math.random() * moleHeads.length);
   const moleHead = moleHeads[moleIndex];
 
@@ -61,6 +63,35 @@ function restartGame() {
   setTimeout(popUpRandomMole, 0);
 }
 
+function endOfGame() {
+  isGameRunning = false;
+  document.querySelector('.sb__game-over').classList.remove('sb__game-over--hidden');
+
+	$.ajax({
+		type: "POST",
+		url: "../php/whack.php",
+		data: {
+			username: username,
+			score: score
+		}
+	, 
+	success: function() {
+	}, 
+	error: function() {
+		alert('Error posting score');
+	}
+	});
+
+  // Reset score, molesLeft, and popupLength to their default values
+  score = def_score;
+  molesLeft = def_molesLeft;
+  popupLength = def_popupLength;
+  document.querySelector('.sb__score').innerHTML = score;
+  document.querySelector('.sb__moles').innerHTML = molesLeft;
+
+
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   const startGameBtn = document.querySelector('#start-game-btn');
   startGameBtn.addEventListener('click', () => {
@@ -87,6 +118,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			score = parseFloat(score.toFixed(2)); // Round the score to 2 decimal places
       document.querySelector('.sb__score').innerHTML = score;
       popupLength -= popupLength / 10;
+
 
       clearTimeout(hideTimeout);
       hideMole(event.target);
