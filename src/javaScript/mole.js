@@ -82,14 +82,6 @@ function endOfGame() {
 	}
 	});
 
-  // Reset score, molesLeft, and popupLength to their default values
-  score = def_score;
-  molesLeft = def_molesLeft;
-  popupLength = def_popupLength;
-  document.querySelector('.sb__score').innerHTML = score;
-  document.querySelector('.sb__moles').innerHTML = molesLeft;
-
-
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -117,8 +109,9 @@ window.addEventListener('DOMContentLoaded', () => {
       score += points;
 			score = parseFloat(score.toFixed(2)); // Round the score to 2 decimal places
       document.querySelector('.sb__score').innerHTML = score;
-      popupLength -= popupLength / 10;
-
+			if(popupLength >= 600) {
+      	popupLength -= popupLength / 10;
+			}
 
       clearTimeout(hideTimeout);
       hideMole(event.target);

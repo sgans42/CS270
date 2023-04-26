@@ -18,7 +18,6 @@ function checkGuess() {
     } else {
         result.textContent = `Your guess is too high. Try again!`;
     }
-		console.log(randomNumber);
 }
 
 function endOfGame() {
@@ -31,7 +30,6 @@ function endOfGame() {
 		}
 	, 
 	success: function() {
-		alert('sucess');
 	}, 
 	error: function() {
 		alert('Error posting score');

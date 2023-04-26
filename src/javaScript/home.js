@@ -119,8 +119,8 @@ function getNumScore() {
 		success: function(response) {
     // Updating user scores
     $("#user_num_score1").text(response.user_scores.score1);
-    $("#user_num_score1").text(response.user_scores.score2);
-    $("#user_num_score1").text(response.user_scores.score3);
+    $("#user_num_score2").text(response.user_scores.score2);
+    $("#user_num_score3").text(response.user_scores.score3);
 
     // Updating top scores
     $("#all_num_score1").text(response.top_scores[0]);

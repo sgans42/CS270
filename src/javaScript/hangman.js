@@ -31,7 +31,6 @@ function endOfGame(won) {
 			}
 		, 
 		success: function() {
-			alert('sucess');
 		}, 
 		error: function() {
 			alert('Error posting score');

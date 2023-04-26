@@ -92,7 +92,6 @@ function endOfGame(message, won) {
 			}
 		, 
 		success: function() {
-			alert('sucess');
 		}, 
 		error: function() {
 			alert('Error posting score');
