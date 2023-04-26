@@ -62,7 +62,7 @@ function getWhackAMoleScore() {
 function getHangScore() {
 	$.ajax({
 		type: "POST",
-		url: "../php/home_tic.php",
+		url: "../php/home_hang.php",
 		data: {
 			username: username,
 		},

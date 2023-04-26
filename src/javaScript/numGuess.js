@@ -11,7 +11,7 @@ function checkGuess() {
 
     if (userGuess == randomNumber) {
         result.textContent = `Congratulations! You guessed the correct number in ${attempts} attempts.`;
-				endOfGame()
+				endOfGame();
     } else if (userGuess < randomNumber) {
         result.textContent = `Your guess is too low. Try again!`;
 				console.log(randomNumber);
