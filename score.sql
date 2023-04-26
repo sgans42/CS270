@@ -54,13 +54,13 @@ INSERT INTO user_info (first_name, username) VALUES
 
 
 INSERT INTO tic_tac_toe (user, score1) VALUES 
-('sgans42', 16),
+('sgans42', 20),
 ('john426', 12),
 ('dgans88', 14),
 ('test123', NULL);
 
 INSERT INTO whack_a_mole (user, score1, score2, score3) VALUES 
-('sgans42', 15.00, 15.00, 15.00),
+('sgans42', 50.11, 46.00, 33.00),
 ('john426', 18.00, 18.00, 18.00),
 ('dgans88', 21.00, 21.00, 21.00),
 ('test123', NULL, NULL, NULL);
@@ -68,17 +68,17 @@ INSERT INTO whack_a_mole (user, score1, score2, score3) VALUES
 INSERT INTO hangman (user, score1) VALUES 
 ('sgans42', 4),
 ('john426', 6),
-('dgans88', 28),
+('dgans88', 8),
 ('test123', NULL);
 
 INSERT INTO memory (user, score1, score2, score3) VALUES 
-('sgans42', 7, 6, 5),
+('sgans42', 23, 21, 7),
 ('john426', 6, 5, 4),
 ('dgans88', 7, 6, 5),
 ('test123', NULL, NULL, NULL);
 
 INSERT INTO number_guesser (user, score1, score2, score3) VALUES 
-('sgans42', 3, 30, 30),
-('john426', 36, 36, 36),
-('dgans88', 42, 42, 42),
+('sgans42', 3, 5, 8),
+('john426', 6, 6, 6),
+('dgans88', 6, 8, 9),
 ('test123', NULL, NULL, NULL);

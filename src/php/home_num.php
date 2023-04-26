@@ -22,7 +22,7 @@
 	$stmt->fetch();
 	$stmt->close();
 
-	$sql = "SELECT score1 FROM number_guesser ORDER BY score1 DESC LIMIT 3";
+	$sql = "SELECT score1 FROM number_guesser WHERE score1 IS NOT NULL ORDER BY score1 ASC LIMIT 3";
 	$stmt = $conn->prepare($sql);
 	$stmt->execute();
 	$stmt->bind_result($top_score1);
