@@ -129,3 +129,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 
+function logout() {
+	sessionStorage.removeItem('fullName');
+	window.location.href = '../../index.html';
+}

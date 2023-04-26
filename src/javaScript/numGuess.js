@@ -45,3 +45,8 @@ function startNewGame() {
     document.getElementById("result").textContent = '';
     document.getElementById("userGuess").value = '';
 }
+
+function logout() {
+	sessionStorage.removeItem('fullName');
+	window.location.href = '../../index.html';
+}

@@ -1,59 +1,141 @@
-//sets username at top of screen
+
 
 var username = sessionStorage.getItem('fullName');
 
-
-// main();
-
-// function main() {
-// 	tic_tac();
-// 	whack();
-
-// }
-
-
-//Tic Tac Toe Score 
-// function tic_tac() {
-
-// }
-
-//Whack a Mole Score
-
-$.ajax({
-  type: "GET",
-  url: "../php/home.php",
-  data: { 
-    user: username
-  },
-	success: function(data) {
-		const scores = JSON.parse(data);
-		// Update the UI with the user's scores
-		for (const game in scores.userScores) {
-			const gamePrefix = game === 'tic_tac_toe' ? 'user_tic' : game === 'whack_a_mole' ? 'user_whack' : game === 'hangman' ? 'user_hang' : game === 'memory' ? 'user_mem' : 'user_num';
-			document.getElementById(`${gamePrefix}_score1`).textContent = scores.userScores[game].score1;
-			if (scores.userScores[game].score2) {
-				document.getElementById(`${gamePrefix}_score2`).textContent = scores.userScores[game].score2;
-			}
-			if (scores.userScores[game].score3) {
-				document.getElementById(`${gamePrefix}_score3`).textContent = scores.userScores[game].score3;
-			}
-		}
-		// Update the UI with the top 3 scores for each game
-		for (const game in scores.topScores) {
-			const gamePrefix = game === 'tic_tac_toe' ? 'all_tic' : game === 'whack_a_mole' ? 'all_whack' : game === 'hangman' ? 'all_hang' : game === 'memory' ? 'all_mem' : 'all_num';
-			document.getElementById(`${gamePrefix}_score1`).textContent = scores.topScores[game].top1;
-			document.getElementById(`${gamePrefix}_score2`).textContent = scores.topScores[game].top2;
-			document.getElementById(`${gamePrefix}_score3`).textContent = scores.topScores[game].top3;
-		}
-		alert('sucess');
-	},
-  error: function() {
-    alert('Error getting scores');
-  }
-});
-
-function logout() {
-  sessionStorage.removeItem('fullName');
-  window.location.href = 'login.html';
+function getScore() {
+	getTicScore();
+	getWhackAMoleScore();
+	getHangScore();
+	getMemScore();
+	getNumScore();
 }
+
+function getTicScore() {
+	$.ajax({
+		type: "POST",
+		url: "../php/home_tic.php",
+		data: {
+			username: username,
+		},
+		dataType: "json",
+		success: function(response) {
+      // Updating user score
+      $("#user_tic_score1").text(response.user_score);
+
+      // Updating top scores
+      $("#all_tic_score1").text(response.top_scores[0]);
+      $("#all_tic_score2").text(response.top_scores[1]);
+      $("#all_tic_score3").text(response.top_scores[2]);
+		},
+		error: function() {
+// alert("Error Tic Tac Toe scores");
+		},
+	});
+}
+
+
+function getWhackAMoleScore() {
+	$.ajax({
+		type: "POST",
+		url: "../php/home_whack.php",
+		data: {
+			username: username,
+		},
+		dataType: "json",
+		success: function(response) {
+    // Updating user scores
+    $("#user_whack_score1").text(response.user_scores.score1);
+    $("#user_whack_score2").text(response.user_scores.score2);
+    $("#user_whack_score3").text(response.user_scores.score3);
+
+    // Updating top scores
+    $("#all_whack_score1").text(response.top_scores[0]);
+    $("#all_whack_score2").text(response.top_scores[1]);
+    $("#all_whack_score3").text(response.top_scores[2]);
+		},
+		error: function() {
+// alert("Error Whack scores");
+		},
+	});
+}
+
+function getHangScore() {
+	$.ajax({
+		type: "POST",
+		url: "../php/home_tic.php",
+		data: {
+			username: username,
+		},
+		dataType: "json",
+		success: function(response) {
+      // Updating user score
+      $("#user_hang_score1").text(response.user_score);
+
+      // Updating top scores
+      $("#all_hang_score1").text(response.top_scores[0]);
+      $("#all_hang_score2").text(response.top_scores[1]);
+      $("#all_hang_score3").text(response.top_scores[2]);
+		},
+		error: function() {
+// alert("Error Hangman scores");
+		},
+	});
+
+}
+
+function getMemScore() {
+	$.ajax({
+		type: "POST",
+		url: "../php/home_mem.php",
+		data: {
+			username: username,
+		},
+		dataType: "json",
+		success: function(response) {
+    // Updating user scores
+    $("#user_mem_score1").text(response.user_scores.score1);
+    $("#user_mem_score2").text(response.user_scores.score2);
+    $("#user_mem_score3").text(response.user_scores.score3);
+
+    // Updating top scores
+    $("#all_mem_score1").text(response.top_scores[0]);
+    $("#all_mem_score2").text(response.top_scores[1]);
+    $("#all_mem_score3").text(response.top_scores[2]);
+		},
+		error: function() {
+// alert("Error Memory Match scores");
+		},
+	});
+}
+
+function getNumScore() {
+	$.ajax({
+		type: "POST",
+		url: "../php/home_num.php",
+		data: {
+			username: username,
+		},
+		dataType: "json",
+		success: function(response) {
+    // Updating user scores
+    $("#user_num_score1").text(response.user_scores.score1);
+    $("#user_num_score1").text(response.user_scores.score2);
+    $("#user_num_score1").text(response.user_scores.score3);
+
+    // Updating top scores
+    $("#all_num_score1").text(response.top_scores[0]);
+    $("#all_num_score2").text(response.top_scores[1]);
+    $("#all_num_score3").text(response.top_scores[2]);
+		},
+		error: function() {
+// alert("Error Number Guesser scores");
+		},
+	});
+}
+
+
+	function logout() {
+		sessionStorage.removeItem('fullName');
+		window.location.href = '../../index.html';
+	}
 

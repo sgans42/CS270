@@ -10,14 +10,7 @@ h1 {
 	color: #333;
 }
 
-button {
-	background-color: #007bff;
-	border: none;
-	color: #fff;
-	padding: 10px 20px;
-	cursor: pointer;
-	margin-bottom: 20px;
-}
+
 
 .grid {
 	display: flex;
@@ -37,4 +30,13 @@ button {
 	display: none;
 	width: 100%;
 	height: 100%;
+}
+
+button.guesser {
+	background-color: #007bff;
+	border: none;
+	color: #fff;
+	padding: 10px 20px;
+	cursor: pointer;
+	margin-top: 10px;
 }

@@ -47,22 +47,38 @@ CREATE TABLE number_guesser (
 
 
 INSERT INTO user_info (first_name, username) VALUES
-('Stephen', 'sgans42'), 
+('David', 'dgans88'),
 ('John', 'john426'),
-('David', 'dgans88');
+('Stephen', 'sgans42'),
+('test', 'test123');
 
 
 INSERT INTO tic_tac_toe (user, score1) VALUES 
-('sgans42', 10), ('john426', 12), ('dgans88', 14);
+('sgans42', 16),
+('john426', 12),
+('dgans88', 14),
+('test123', NULL);
 
 INSERT INTO whack_a_mole (user, score1, score2, score3) VALUES 
-('sgans42', 15, 15, 15), ('john426', 18, 18, 18), ('dgans88', 21, 21, 21);
+('sgans42', 15.00, 15.00, 15.00),
+('john426', 18.00, 18.00, 18.00),
+('dgans88', 21.00, 21.00, 21.00),
+('test123', NULL, NULL, NULL);
 
 INSERT INTO hangman (user, score1) VALUES 
-('sgans42', 4), ('john426', 6), ('dgans88', 28);
+('sgans42', 4),
+('john426', 6),
+('dgans88', 28),
+('test123', NULL);
 
 INSERT INTO memory (user, score1, score2, score3) VALUES 
-('sgans42', 7, 6, 5), ('john426', 6, 5, 4), ('dgans88', 7, 6, 5);
+('sgans42', 7, 6, 5),
+('john426', 6, 5, 4),
+('dgans88', 7, 6, 5),
+('test123', NULL, NULL, NULL);
 
 INSERT INTO number_guesser (user, score1, score2, score3) VALUES 
-('sgans42', 3, 30, 30), ('john426', 36, 36, 36), ('dgans88', 42, 42, 42);
+('sgans42', 3, 30, 30),
+('john426', 36, 36, 36),
+('dgans88', 42, 42, 42),
+('test123', NULL, NULL, NULL);

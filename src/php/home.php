@@ -1,17 +1,28 @@
 <?php
-//dont edit anything under here
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "score";
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
-  // Check connection
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	}
-	
-$user = $_GET['user'];
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+header("Content-Type: application/json");
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "score";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    echo json_encode(["error" => "Connection failed: " . $conn->connect_error]);
+    exit();
+}
+
+if (!isset($_GET['user'])) {
+    echo json_encode(["error" => "User not provided"]);
+    exit();
+}
+
+$username = $_GET['user'];
 
 $games = ['tic_tac_toe', 'whack_a_mole', 'hangman', 'memory', 'number_guesser'];
 
@@ -19,41 +30,36 @@ $userScores = [];
 $topScores = [];
 
 foreach ($games as $game) {
-  // Get the user's scores
-  $sql = "SELECT score1, score2, score3 FROM $game WHERE user = ?";
-  $stmt = $conn->prepare($sql);
-  $stmt->bind_param("s", $user);
-  $stmt->execute();
-  $stmt->bind_result($score1, $score2, $score3);
-  $stmt->fetch();
-  $stmt->close();
+    $numScores = 3;
 
-  $userScores[$game] = [
-    "score1" => $score1,
-    "score2" => $score2,
-    "score3" => $score3
-  ];
+    if ($game === 'tic_tac_toe' || $game === 'hangman') {
+        $numScores = 1;
+    }
 
-  // Get the top 3 scores for the game
-  $sql = "SELECT score1, score2, score3 FROM $game ORDER BY score1 DESC, score2 DESC, score3 DESC LIMIT 3";
-  $result = $conn->query($sql);
+    $sql = "SELECT " . implode(',', array_map(fn($i) => "score{$i}", range(1, $numScores))) . " FROM $game WHERE user = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->bind_result(...array_map(fn($i) => ${"score{$i}"}, range(1, $numScores)));
+    $stmt->fetch();
+    $stmt->close();
 
-  $top1 = $top2 = $top3 = null;
-  $i = 1;
-  while ($row = $result->fetch_assoc()) {
-    ${"top" . $i} = $row["score1"];
-    $i++;
-  }
+    $userScores[$game] = array_combine(array_map(fn($i) => "score{$i}", range(1, $numScores)), array_map(fn($i) => ${"score{$i}"}, range(1, $numScores)));
 
-  $topScores[$game] = [
-    "top1" => $top1,
-    "top2" => $top2,
-    "top3" => $top3
-  ];
+    $sql = "SELECT " . implode(',', array_map(fn($i) => "score{$i}", range(1, $numScores))) . " FROM $game ORDER BY " . implode(', ', array_map(fn($i) => "score{$i} DESC", range(1, $numScores))) . " LIMIT 3";
+    $result = $conn->query($sql);
+
+    $top = [];
+    while ($row = $result->fetch_assoc()) {
+        for ($i = 1; $i <= $numScores; $i++) {
+            $top["top{$i}"] = $row["score{$i}"];
+        }
+    }
+
+    $topScores[$game] = $top;
 }
 
 $conn->close();
 
-// Return the scores in JSON format
 echo json_encode(["userScores" => $userScores, "topScores" => $topScores]);
 ?>

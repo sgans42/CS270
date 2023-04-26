@@ -2,14 +2,15 @@
 <html lang="en">
 	<head>
 		<title>Best Games Home</title>
-		<link href="..\css\home.css" rel="stylesheet">
-		<link href="..\css\header.css" rel="stylesheet">
-    <script defer type="text/javascript" src="../javaScript/home.js"></script>
+		<link href="../css/home.css" rel="stylesheet">
+		<link href="../css/header.css" rel="stylesheet">
+		<script defer type="text/javascript" src="../javaScript/home.js"></script>
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script>
 			$(document).ready(function() {
 			 	var username = sessionStorage.getItem('fullName');
 				document.getElementById("cur_username").textContent = sessionStorage.getItem('fullName');
+				getScore();
 			});
 		</script>
 	</head>
@@ -31,12 +32,12 @@
     </header>
     <!-- end of header-->
 		
-		<div method="GET" class="cont"> <!-- entire game and leaderboard display -->
+		<div class="cont"> <!-- entire game and leaderboard display -->
 			<div class="game"> <!-- game row -->
 
         <!-- Tic Tac Toe -->
         <a href="tic.html">
-          <div class="game" id="blk" name="tic-tac-toe"> <!-- blk is block for display -->
+          <div class="game" id="blk" data-name="tic-tac-toe"> <!-- blk is block for display -->
             <h2>Tic Tac Toe</h2>
             <img src="../pic/tic.png">
           </div>
@@ -44,7 +45,7 @@
         
         <!-- Whack a Mole -->
         <a href="mole.html">
-          <div class="game" id="blk" name="mole">
+          <div class="game" id="blk" data-name="mole">
             <h2>Whack a mole</h2>
             <img src="../pic/mole.jpg">
           </div>
@@ -52,7 +53,7 @@
 
         <!-- Hangman -->
         <a href="hangman.html">
-          <div class="game" id="blk" name="hangman">
+          <div class="game" id="blk" data-name="hangman">
             <h2>Hangman</h2>
             <img src="../pic/hangman.png">
           </div>
@@ -60,7 +61,7 @@
 
         <!-- Memory Match -->
         <a href="memory.html">
-          <div class="game" id="blk" name="memory-match">
+          <div class="game" id="blk" data-name="memory-match">
             <h2>Memory Match</h2>
             <img src="../pic/memory.png">
           </div>
@@ -68,7 +69,7 @@
 
         <!-- Number Guesser -->
         <a href="numGuess.html">
-          <div class="game" id="blk" name="num-guess"> <!-- blk is block for display -->
+          <div class="game" id="blk" data-name="num-guess"> <!-- blk is block for display -->
             <h2>Number Guesser</h2>
             <img src="../pic/numGuess.jpg">
           </div>
@@ -77,40 +78,38 @@
 
 			</div>
 
-			<div method="GET" class="leaderboard"> <!-- Leaderboard Row-->
+			<div class="leaderboard"> <!-- Leaderboard Row-->
 
-        <!-- Tic Tac Toe -->
-				<div class="leaderboard" id="blk" name="tic-tac-toe">  <!-- Start of Tic Tac Toe Leaderboard -->
+				<!-- Tic Tac Toe -->
+				<div class="leaderboard" id="blk" data-name="tic-tac-toe">  <!-- Start of Tic Tac Toe Leaderboard -->
 					<h2>Tic Tac Toe</h2> <!-- Tic Tac Toe Title -->
 					
 					<div class="score_elem"><!-- Score board element -->
-						<div class="score" id="user_score" name="tic-tac-toe"> <!-- User score -->
+						<div class="score" id="user_score" data-name="tic-tac-toe"> <!-- User score -->
 							<p>Your score</p>
-							<p>Games won: 15</p>
-
+							<p>Games won: <span id="user_tic_score1">15</span> </p>
 						</div>
 
 						<div class="score" id="line">
 						</div>
 						
-						<div class="score" id="all_score" name="tic-tac-toe"> <!-- Everyones score -->
+						<div class="score" id="all_score" data-name="tic-tac-toe"> <!-- Everyones score -->
 							<p>All Score</p>
-							<p>Games won: 15</p>
-							<p>Games won: 15</p>
-							<p>Games won: 15</p>
+							<p >Games won: <span id="all_tic_score1">15</span></p>
+							<p >Games won: <span id="all_tic_score2">15</span></p>
+							<p >Games won: <span id="all_tic_score3">15</span></p>
 						</div>
 					</div>
-					
-					
-				</div> <!-- end of Tic Tac Toe Leaderboard -->
-        
+				</div> <!-- end of Tic Tac Toe Leaderboard --> 
+				
+				
         <!-- Whack a Mole -->
-				<div class="leaderboard-show" id="blk" name="mole">
+				<div class="leaderboard-show" id="blk" data-name="mole">
 					<h2>Whack a mole</h2>
 
 					
 					<div class="score_elem"><!-- Score board element -->
-						<div class="score" id="user_score" name="mole"> <!-- User score -->
+						<div class="score" id="user_score" data-name="mole"> <!-- User score -->
 							<p>Your score</p>
 							<p >Score 1: <span id="user_whack_score1">15</span></p>
 							<p >Score 2: <span id="user_whack_score2">15</span></p>
@@ -120,7 +119,7 @@
 						<div class="score" id="line">
 						</div>
 
-						<div class="score" id="all_score" name="mole"> <!-- Everyones score -->
+						<div class="score" id="all_score" data-name="mole"> <!-- Everyones score -->
 							<p>All Score</p>
 							<p >Score 1: <span id="all_whack_score1">15</span></p>
 							<p >Score 2: <span id="all_whack_score2">15</span></p>
@@ -129,37 +128,34 @@
 					</div>
 				</div> <!-- end of Whack a mole Leaderboard -->
 
-        <!-- Hangman -->
-        <div class="leaderboard-show" id="blk" name="hangman">
+				<!-- Hangman -->
+				<div class="leaderboard-show" id="blk" data-name="hangman">
 					<h2>Hangman</h2>
 					
 					<div class="score_elem"><!-- Score board element -->
-						<div class="score" id="user_score" name="hangman"> <!-- User score -->
+						<div class="score" id="user_score" data-name="hangman"> <!-- User score -->
 							<p>Your score</p>
-							<p >Score: <span id="user_tic_score1">15</span></p>
-
+							<p >Games won: <span id="user_hang_score1">15</span></p>
 						</div>
 
 						<div class="score" id="line">
-						</div>						
+						</div>                        
 
-						<div class="score" id="all_score" name="hangman"> <!-- Everyones score -->
+						<div class="score" id="all_score" data-name="hangman"> <!-- Everyones score -->
 							<p>All Score</p>
-							<p >Score 1: <span id="all_tic_score1">15</span></p>
-							<p >Score 2: <span id="all_tic_score2">15</span></p>
-							<p >Score 3: <span id="all_tic_score3">15</span></p>
+							<p >Games won: <span id="all_hang_score1">15</span></p>
+							<p >Games won: <span id="all_hang_score2">15</span></p>
+							<p >Games won: <span id="all_hang_score3">15</span></p>
 						</div>
 					</div>
-					
-					
 				</div> <!-- end of Hangman Leaderboard -->
 
         <!-- Memory Match -->
-        <div class="leaderboard-show" id="blk" name="memory-match">
+        <div class="leaderboard-show" id="blk" data-name="memory-match">
 					<h2>Memory Match</h2>
 
 					<div class="score_elem"><!-- Score board element -->
-						<div class="score" id="user_score" name="memory-match"> <!-- User score -->
+						<div class="score" id="user_score" data-name="memory-match"> <!-- User score -->
 							<p>Your score</p>
 							<p >Score 1: <span id="user_mem_score1">15</span></p>
 							<p >Score 2: <span id="user_mem_score2">15</span></p>
@@ -170,7 +166,7 @@
 						<div class="score" id="line">
 						</div>
 
-						<div class="score" id="all_score" name="memory-match"> <!-- Everyones score -->
+						<div class="score" id="all_score" data-name="memory-match"> <!-- Everyones score -->
 							<p>All Score</p>
 							<p >Score 1: <span id="all_mem_score1">15</span></p>
 							<p >Score 2: <span id="all_mem_score2">15</span></p>
@@ -182,11 +178,11 @@
 				</div> <!-- end of Memory Match Leaderboard -->
 
         <!-- Number Guesser -->
-        <div class="leaderboard-show" id="blk" name="num-guess">
+        <div class="leaderboard-show" id="blk" data-name="num-guess">
           <h2>Number Guesser</h2>
 					
 					<div class="score_elem"><!-- Score board element -->
-						<div class="score" id="user_score" name="num-guess"> <!-- User score -->
+						<div class="score" id="user_score" data-name="num-guess"> <!-- User score -->
 							<p>Your score</p>
 							<p >Guesses 1: <span id="user_num_score1">15</span></p>
 							<p >Guesses 2: <span id="user_num_score1">15</span></p>
@@ -197,7 +193,7 @@
 						<div class="score" id="line">
 						</div>
 
-						<div class="score" id="all_score" name="num-guess"> <!-- Everyones score -->
+						<div class="score" id="all_score" data-name="num-guess"> <!-- Everyones score -->
 							<p>All Score</p>
 							<p >Guesses 1: <span id="all_num_score1">15</span></p>
 							<p >Guesses 2: <span id="all_num_score2">15</span></p>
